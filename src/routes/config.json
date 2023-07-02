@@ -1,0 +1,73 @@
+{"verseny":
+{
+    "events":{
+        "1":"turn-coat",
+        "2":"perspective",
+        "3":"quiz",
+        "4":"film",
+        "5":"singing",
+        "6":"asyou",
+        "7":"grpdance",
+        "8":"adact",
+        "9":"mime",
+        "10":"story",
+        "11":"young",
+        "12":"skit",
+        "13":"trivia",
+        "14":"treasure",
+        "15":"debate"
+
+
+
+
+
+    }
+
+},
+
+"kreeda":{
+    "1":"Football",
+    "2":"Basketball",
+    "3":"Carrom"
+},
+"bus":{
+    "1":"Entry",
+    "2":"Exit"
+},
+"carnival":
+{
+    "events":{
+        "1":"carnival",
+        "2":"magic-show"
+        
+
+
+
+
+    },
+    "slots":{
+        "10:30-11:30":"10:30 - 11:30",
+        "12:30-01:30":"12:30 - 01:30"
+
+    },
+    "magic":{
+        "Yes":"true",
+        "No":"false"
+    },
+    "parents":{
+        "true":"Yes",
+        "false":"No"
+    },
+    "payment":{
+        "Cash":"cash",
+        "E-Payment":"epayment (qrcode)",
+        "Maybe Later":"maybe later"
+    },
+    "opts":{
+
+        "Adults":"Adults",
+        "Children":"Children",
+        "Both":"Both"
+    }
+}
+}
