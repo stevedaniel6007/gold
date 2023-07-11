@@ -94,7 +94,7 @@ export default component$(() => {
   })
   useClientEffect$(() => {
 
-    onAuthStateChanged(auth, async (user) => {
+    onAuthStateChanged(auth, async (user:any) => {
       stoot.isLoggedIn = !!user;
       state.loading=true
 
