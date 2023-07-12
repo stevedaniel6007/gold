@@ -71,7 +71,7 @@ export default component$(()=>{
 
     return(
         <div class="flex h-full w-full items-center content-center flex-col">
-            <div id="ok" class="grid  md:grid-cols-2  grid-cols-1 lg:grid-cols-3">
+            <div id="ok" class="grid  md:grid-cols-2  grid-cols-1 lg:grid-cols-8">
 
             </div>
 <button class="subm"  onClick$={()=>getFiles()}>Get All QRs</button>
