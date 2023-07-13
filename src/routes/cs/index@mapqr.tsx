@@ -3,7 +3,6 @@ import { component$, useClientEffect$ } from '@builder.io/qwik';
 import { useStore } from '@builder.io/qwik';
 import {  onAuthStateChanged } from 'firebase/auth';
 import { auth } from '~/services/firebase';
-import dt from '../config.json'
 import { $ } from '@builder.io/qwik';
 import { supabase } from '~/services/firebase';
 import { Ov, QRReader } from '~/integrations/react/registration';
@@ -73,7 +72,7 @@ export default component$(() => {
     input:'',
     qr:'',
     success:false,
-    stop:'',
+  
     route: '',maps:{}
   })
   useClientEffect$(() => {
@@ -119,9 +118,7 @@ state.loading=false
     
     const name = state.name;
     const adm = state.email;
-    const stop = state.stop;
-    let route = state.route;
-    const r = state.maps
+    const route = state.route;
     console.log(adm)
     const eve = "Entry"
 
