@@ -47,7 +47,7 @@ for(let i =0;i<=b.length-1;i++){
             if(context!=null)
             {            context.font = "8pt Calibri";}
             context?.fillText(b[i]['StudName'], 20, 12);
-          //  downloadURI(canvas.toDataURL(),b[i]['Admission Num'])
+            downloadURI(canvas.toDataURL(),b[i]['Admission Num'])
 
         }
     })
