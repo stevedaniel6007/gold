@@ -1,8 +1,9 @@
 //@ts-ignore
-import { component$, useClientEffect$ } from '@builder.io/qwik';
+import { component$, useClientEffect$, useSignal } from '@builder.io/qwik';
 import { useStore } from '@builder.io/qwik';
 import {  onAuthStateChanged } from 'firebase/auth';
 import { auth } from '~/services/firebase';
+
 import { $ } from '@builder.io/qwik';
 import { supabase } from '~/services/firebase';
 import { Ov, QRReader } from '~/integrations/react/registration';
@@ -70,7 +71,9 @@ export default component$(() => {
     email:'',
     data:'',
     input:'',
+    checked:false,
     qr:'',
+  
     success:false,
   
     route: '',maps:{}
@@ -223,8 +226,11 @@ return(
           }}} constraints={{facingMode: 'environment'}}/>
           <h1 className={state.qr?`hidden`:''} >{state.qr}</h1>
           <div className={state.qr?`hidden`:'flex items-center content-center mx-auto flex-col'}>         <h1 class="text-black  text-sm  md:text-md text-center mx-auto font-sans font-medium opacity-80 ">Or</h1>
+          <input type="checkbox"  onChange$={(e:any)=>(state.checked=!!e.target.value,alert(state.checked))} />
 
-          <input  placeholder="Type Admission Number" className={state.qr?`hidden`:'block w-auto bg-white mx-10 focus:outline-none focus:shadow-outline border border-gray-300 rounded-md py-3 px-4 block appearance-none leading-normal focus:border-blue-400 text-sm md:text-md my-5'}  onChange$={(e:any)=>state.input=e.target.value} name="adm" id="adm" ></input>
+          <input autoFocus  onKeyUp$={event => {
+                if (event.key === 'Enter') {setTimeout(()=>{getResults(state.input)}),200}}} placeholder="Type Admission Number" className={state.qr?`hidden`:'block w-auto bg-white mx-10 focus:outline-none focus:shadow-outline border border-gray-300 rounded-md py-3 px-4 block appearance-none leading-normal focus:border-blue-400 text-sm md:text-md my-5'}  onChange$={(e:any)=>(state.input=e.target.value
+              )} name="adm" id="adm" value={state.input} >{state.input}</input>
   
 
 
