@@ -226,7 +226,6 @@ return(
           }}} constraints={{facingMode: 'environment'}}/>
           <h1 className={state.qr?`hidden`:''} >{state.qr}</h1>
           <div className={state.qr?`hidden`:'flex items-center content-center mx-auto flex-col'}>         <h1 class="text-black  text-sm  md:text-md text-center mx-auto font-sans font-medium opacity-80 ">Or</h1>
-          <input type="checkbox"  onChange$={(e:any)=>(state.checked=!!e.target.value,alert(state.checked))} />
 
           <input autoFocus  onKeyUp$={event => {
                 if (event.key === 'Enter') {setTimeout(()=>{getResults(state.input)}),200}}} placeholder="Type Admission Number" className={state.qr?`hidden`:'block w-auto bg-white mx-10 focus:outline-none focus:shadow-outline border border-gray-300 rounded-md py-3 px-4 block appearance-none leading-normal focus:border-blue-400 text-sm md:text-md my-5'}  onChange$={(e:any)=>(state.input=e.target.value
