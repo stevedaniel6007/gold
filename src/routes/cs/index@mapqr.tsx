@@ -1,5 +1,5 @@
 //@ts-ignore
-import { component$, useClientEffect$, useSignal } from '@builder.io/qwik';
+import { component$, useClientEffect$ } from '@builder.io/qwik';
 import { useStore } from '@builder.io/qwik';
 import {  onAuthStateChanged } from 'firebase/auth';
 import { auth } from '~/services/firebase';
