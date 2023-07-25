@@ -3,18 +3,35 @@ import { component$, useClientEffect$ } from '@builder.io/qwik';
 import { useStore } from '@builder.io/qwik';
 import {  onAuthStateChanged } from 'firebase/auth';
 import { auth } from '~/services/firebase';
-
+import dt from '../config.json'
 import { $ } from '@builder.io/qwik';
 import { supabase } from '~/services/firebase';
 import { Ov, QRReader } from '~/integrations/react/registration';
 export async function check(adm:any){
-  const {data,error }= await supabase.from('Stud Log').select("time").eq('uid',adm)
+  const {data,error }= await supabase.from('Lab Log').select("time, exercise").eq('uid',adm)
   if(error){
     alert(error)
 
   }
   else{return data}
 }
+export const Options = component$(()=>{
+  const a:any=Object.values(dt.carnival.events)
+  const eles = []
+
+  for (let i=0;i<=a.length;i++){
+      eles.push(<option value={a[i]}>{a[i]}</option>)
+
+  }
+  return(
+      <select name="event"  id="event" class={`text-lg  font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6`} style=" -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;">
+{eles}
+</select>
+  )
+
+})
 /*
 
 <form preventdefault:submit onSubmit$={handleSubmit$}>
@@ -71,6 +88,7 @@ export default component$(() => {
     email:'',
     data:'',
     input:'',
+    exercise:1,
     checked:false,
     qr:'',
   
@@ -134,17 +152,16 @@ state.loading=false
       c=undefined
     }
     console.log(c)
-    const bd = new Date(c&&c.length>0?c[c.length-1]["time"]:'null')
-    const diffInMillis = dts.getTime() - bd.getTime()
-    let isLessThan1Hour = diffInMillis < 60 * 60 * 1000;
+    const b = (c&&c.length>0?c[c.length-1]["exercise"]:'null')
+    let isLessThan1Hour = b==state.exercise;
     if(!c){
         isLessThan1Hour = false
     }
     
     if(!isLessThan1Hour){
     const { error } = await supabase
-    .from('Stud Log')
-    .insert({ uid:adm,name:name, time:dts,event:eve, "roll no":route })
+    .from('Lab Log')
+    .insert({ uid:adm,name:name, time:dts,event:eve, "roll no":route,exercise:state.exercise })
     if(error){
       console.log(error)
         }
@@ -158,7 +175,7 @@ state.loading=false
         }    
 
   }else{
-    alert('You cannot enter same value again. You have to wait for an hour between two entries.')
+    alert('You have already marked this exercise for this student')
     state.qr=''
   }}
 
@@ -231,7 +248,24 @@ return(
                 if (event.key === 'Enter') {setTimeout(()=>{getResults(state.input)}),200}}} placeholder="Type Admission Number" className={state.qr?`hidden`:'block w-auto bg-white mx-10 focus:outline-none focus:shadow-outline border border-gray-300 rounded-md py-3 px-4 block appearance-none leading-normal focus:border-blue-400 text-sm md:text-md my-5'}  onChange$={(e:any)=>(state.input=e.target.value
               )} name="adm" id="adm" value={state.input} >{state.input}</input>
   
-
+          <select onChange$={ (e:any)=>(
+    state.exercise=e.target.value,
+    console.log(e.target.value,state.exercise)
+  )}
+          class={`text-md  font-semibold border border-indigo-900 text-neutral-700 mb-4  outline-none rounded-md py-2 px-4`} style=" -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;">
+        <option  value={1}>1</option>
+        <option  value={2}>2</option>
+        <option  value={3}>3</option>
+        <option  value={4}>4</option>
+        <option  value={5}>5</option>
+        <option  value={6}>6</option>
+        <option  value={7}>7</option>
+        <option  value={8}>8</option>
+        <option  value={9}>9</option>
+        <option  value={10}>10</option>
+            </select>
 
           <button className={state.qr?`hidden`:'bg-blue-200 mx-10  font-semibold font-sans text-blue-700 px-10 transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-xs md:text-sm mx-auto'} onClick$={async (e:any)=>(e.preventDefault(),getResults(state.input))}>{"Check this number"}</button>
 </div>

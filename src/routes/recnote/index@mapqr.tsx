@@ -8,7 +8,7 @@ import { $ } from '@builder.io/qwik';
 import { supabase } from '~/services/firebase';
 import { Ov, QRReader } from '~/integrations/react/registration';
 export async function check(adm:any){
-  const {data,error }= await supabase.from('Stud Log').select("time").eq('uid',adm)
+  const {data,error }= await supabase.from('Rec Log').select("time").eq('uid',adm)
   if(error){
     alert(error)
 
@@ -143,7 +143,7 @@ state.loading=false
     
     if(!isLessThan1Hour){
     const { error } = await supabase
-    .from('Stud Log')
+    .from('Rec Log')
     .insert({ uid:adm,name:name, time:dts,event:eve, "roll no":route })
     if(error){
       console.log(error)

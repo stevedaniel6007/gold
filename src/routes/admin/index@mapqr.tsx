@@ -3,12 +3,11 @@ import { component$, useClientEffect$ } from '@builder.io/qwik';
 import { useStore } from '@builder.io/qwik';
 import {  onAuthStateChanged } from 'firebase/auth';
 import { auth } from '~/services/firebase';
-
 import { $ } from '@builder.io/qwik';
 import { supabase } from '~/services/firebase';
 import { Ov, QRReader } from '~/integrations/react/registration';
 export async function check(adm:any){
-  const {data,error }= await supabase.from('Stud Log').select("time").eq('uid',adm)
+  const {data,error }= await supabase.from('Bus Log').select("time").eq('uid',adm)
   if(error){
     alert(error)
 
@@ -71,16 +70,14 @@ export default component$(() => {
     email:'',
     data:'',
     input:'',
-    checked:false,
     qr:'',
-  
     success:false,
-  
+    stop:'',
     route: '',maps:{}
   })
   useClientEffect$(() => {
 
-    onAuthStateChanged(auth, async (user) => {
+    onAuthStateChanged(auth, async (user:any) => {
       stoot.isLoggedIn = !!user;
       state.loading=true
 
@@ -121,7 +118,9 @@ state.loading=false
     
     const name = state.name;
     const adm = state.email;
-    const route = state.route;
+    const stop = state.stop;
+    let route = state.route;
+    const r = state.maps
     console.log(adm)
     const eve = "Entry"
 
@@ -134,17 +133,23 @@ state.loading=false
       c=undefined
     }
     console.log(c)
+    const d = new Date()
     const bd = new Date(c&&c.length>0?c[c.length-1]["time"]:'null')
     const diffInMillis = dts.getTime() - bd.getTime()
     let isLessThan1Hour = diffInMillis < 60 * 60 * 1000;
     if(!c){
         isLessThan1Hour = false
     }
-    
+    const a=Object.values(r).length
+    for(let i = 0 ; i <a; i++){
+      if(r[i]["Area"]==stop){
+        route=r[i]["Route"]
+      }
+    }
     if(!isLessThan1Hour){
     const { error } = await supabase
-    .from('Stud Log')
-    .insert({ uid:adm,name:name, time:dts,event:eve, "roll no":route })
+    .from('Bus Log')
+    .insert({ uid:adm,name:name, time:dts,event:eve,stop:stop, route:route, date:d })
     if(error){
       console.log(error)
         }
@@ -174,15 +179,15 @@ console.log(state.qr)
 
     }
     else if (res.length==8 )[
-      col = "ADM NO"
+      col = "Admission Num"
 
     ]
 
 const { data } = await supabase
-.from('Day')
+.from('Bus')
 .select("*")
 .eq(col,`${res}`)
-if(data && data.length!=0){state.data;state.route=data[0]["ROLL NO"];state.name=data[0]["STUDENT NAME"];state.email=data[0]["ADM NO"];handleSubmit$()}else{console.log('no data')}
+if(data && data.length!=0){state.data;state.route=data[0]["Route"];state.stop=data[0]["Bus Stop"];state.name=data[0]["StudName"];state.email=data[0]["Admission Num"];handleSubmit$()}else{console.log('no data')}
 
   })
 
@@ -227,9 +232,7 @@ return(
           <h1 className={state.qr?`hidden`:''} >{state.qr}</h1>
           <div className={state.qr?`hidden`:'flex items-center content-center mx-auto flex-col'}>         <h1 class="text-black  text-sm  md:text-md text-center mx-auto font-sans font-medium opacity-80 ">Or</h1>
 
-          <input autoFocus  onKeyUp$={event => {
-                if (event.key === 'Enter') {setTimeout(()=>{getResults(state.input)}),200}}} placeholder="Type Admission Number" className={state.qr?`hidden`:'block w-auto bg-white mx-10 focus:outline-none focus:shadow-outline border border-gray-300 rounded-md py-3 px-4 block appearance-none leading-normal focus:border-blue-400 text-sm md:text-md my-5'}  onChange$={(e:any)=>(state.input=e.target.value
-              )} name="adm" id="adm" value={state.input} >{state.input}</input>
+          <input  placeholder="Type Admission Number" className={state.qr?`hidden`:'block w-auto bg-white mx-10 focus:outline-none focus:shadow-outline border border-gray-300 rounded-md py-3 px-4 block appearance-none leading-normal focus:border-blue-400 text-sm md:text-md my-5'}  onChange$={(e:any)=>state.input=e.target.value} name="adm" id="adm" ></input>
   
 
 

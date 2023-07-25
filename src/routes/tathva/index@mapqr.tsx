@@ -8,7 +8,7 @@ import { $ } from '@builder.io/qwik';
 import { supabase } from '~/services/firebase';
 import { Ov, QRReader } from '~/integrations/react/registration';
 export async function check(adm:any){
-  const {data,error }= await supabase.from('Stud Log').select("time").eq('uid',adm)
+  const {data,error }= await supabase.from('Tathva').select("time").eq('uid',adm)
   if(error){
     alert(error)
 
@@ -136,14 +136,14 @@ state.loading=false
     console.log(c)
     const bd = new Date(c&&c.length>0?c[c.length-1]["time"]:'null')
     const diffInMillis = dts.getTime() - bd.getTime()
-    let isLessThan1Hour = diffInMillis < 60 * 60 * 1000;
+    let isLessThan1Hour = diffInMillis < 60 * 60 * 100000 * 1000;
     if(!c){
         isLessThan1Hour = false
     }
     
     if(!isLessThan1Hour){
     const { error } = await supabase
-    .from('Stud Log')
+    .from('Tathva')
     .insert({ uid:adm,name:name, time:dts,event:eve, "roll no":route })
     if(error){
       console.log(error)
@@ -168,15 +168,10 @@ state.loading=false
   const getResults = $(async (res:any) => {
     state.qr=res
 console.log(state.qr)
-    let col = "Hash"
-    if(res.length>8){
-    col="Hash"
 
-    }
-    else if (res.length==8 )[
-      col = "ADM NO"
+      var col = "ADM NO"
 
-    ]
+    
 
 const { data } = await supabase
 .from('Day')
