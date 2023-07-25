@@ -48,7 +48,7 @@ for(let i =0;i<=b.length-1;i++){
             {            context.font = "8pt Calibri";}
             context?.fillText(b[i]['ROLL NO'], 20, 12);
             context?.fillText(b[i]['ADM NO'], 20, 160);
-           // downloadURI(canvas.toDataURL(),b[i]['Admission Num'])
+            downloadURI(canvas.toDataURL(),b[i]['Admission Num'])
 
         }
     })

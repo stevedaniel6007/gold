@@ -169,7 +169,7 @@ state.loading=false
     state.qr=res
 console.log(state.qr)
 
-      var col = "ADM NO"
+      const col = "ADM NO"
 
     
 
