@@ -146,7 +146,7 @@ state.loading=false
     const date = new Date()
     dts= new Date(date.getTime() - date.getTimezoneOffset()*60000);
    
-    let c=await check(adm,state.exercise)
+    const c=await check(adm,state.exercise)
    // alert(c)
     console.log(c)
     
