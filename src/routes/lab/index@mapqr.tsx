@@ -7,8 +7,8 @@ import dt from '../config.json'
 import { $ } from '@builder.io/qwik';
 import { supabase } from '~/services/firebase';
 import { Ov, QRReader } from '~/integrations/react/registration';
-export async function check(adm:any){
-  const {data,error }= await supabase.from('Lab Log').select("time, exercise").eq('uid',adm)
+export async function check(adm:any,exercise:any){
+  const {data,error }= await supabase.from('Lab Log').select("exercise").eq('uid',adm).eq('exercise',exercise)
   if(error){
     alert(error)
 
@@ -147,13 +147,13 @@ state.loading=false
     const date = new Date()
     dts= new Date(date.getTime() - date.getTimezoneOffset()*60000);
    
-    let c=await check(adm)
+    let c=await check(adm,state.exercise)
     if(!c){
       c=undefined
     }
     console.log(c)
-    const b = (c&&c.length>0?c[c.length-1]["exercise"]:'null')
-    let isLessThan1Hour = b==state.exercise;
+    
+    let isLessThan1Hour=true;
     if(!c){
         isLessThan1Hour = false
     }
