@@ -148,13 +148,11 @@ state.loading=false
     dts= new Date(date.getTime() - date.getTimezoneOffset()*60000);
    
     let c=await check(adm,state.exercise)
-    if(!c){
-      c=undefined
-    }
+   // alert(c)
     console.log(c)
     
     let isLessThan1Hour=true;
-    if(!c){
+    if(c==null || c.length==0){
         isLessThan1Hour = false
     }
     
