@@ -263,6 +263,12 @@ return(
         <option  value={8}>8</option>
         <option  value={9}>9</option>
         <option  value={10}>10</option>
+        <option  value={11}>11</option>
+        <option  value={12}>12</option>
+        <option  value={13}>13</option>
+        <option  value={14}>14</option>
+        <option  value={15}>15</option>
+        <option  value={16}>16</option>
             </select>
 
           <button className={state.qr?`hidden`:'bg-blue-200 mx-10  font-semibold font-sans text-blue-700 px-10 transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-xs md:text-sm mx-auto'} onClick$={async (e:any)=>(e.preventDefault(),getResults(state.input))}>{"Check this number"}</button>
