@@ -158,7 +158,7 @@ state.loading=false
         }    
 
   }else{
-    alert('You cannot enter same value again. You have to wait for an hour between two entries.')
+    alert('You have already entered this student')
     state.qr=''
   }}
 

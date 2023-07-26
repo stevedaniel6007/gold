@@ -136,7 +136,7 @@ state.loading=false
     console.log(c)
     const bd = new Date(c&&c.length>0?c[c.length-1]["time"]:'null')
     const diffInMillis = dts.getTime() - bd.getTime()
-    let isLessThan1Hour = diffInMillis < 60 * 60 * 1000;
+    let isLessThan1Hour = diffInMillis < 60 * 60 * 1000 *1000 *9999;
     if(!c){
         isLessThan1Hour = false
     }
@@ -158,7 +158,7 @@ state.loading=false
         }    
 
   }else{
-    alert('You cannot enter same value again. You have to wait for an hour between two entries.')
+    alert('You have already entered for this student.')
     state.qr=''
   }}
 
