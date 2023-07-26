@@ -20,6 +20,7 @@ export default component$(() => {
   <Link class="subm" href="/cs">Attendance</Link>
   <Link class="subm" href="/tathva">Tathva</Link>
   <Link class="subm" href="/recnote">Record Note</Link>
+  <Link class="subm" href="/assignment">Assignment</Link>
   <Link class="subm" href="/lab">Lab Manual</Link>
   </div>
   
