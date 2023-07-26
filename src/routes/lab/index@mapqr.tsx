@@ -141,7 +141,6 @@ state.loading=false
     const adm = state.email;
     const route = state.route;
     console.log(adm)
-    const eve = "Entry"
 
     let dts = new Date()
     const date = new Date()
@@ -159,7 +158,7 @@ state.loading=false
     if(!isLessThan1Hour){
     const { error } = await supabase
     .from('Lab Log')
-    .insert({ uid:adm,name:name, time:dts,event:eve, "roll no":route,exercise:state.exercise })
+    .insert({ uid:adm,name:name, time:dts, "roll no":route,exercise:state.exercise })
     if(error){
       console.log(error)
         }
