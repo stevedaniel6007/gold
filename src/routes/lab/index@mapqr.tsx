@@ -168,7 +168,7 @@ state.loading=false
             state.success=false
            // state.qr=''
             state.exercise=1
-           // state.input=''
+            state.input=''
           },3000)
         }    
 
