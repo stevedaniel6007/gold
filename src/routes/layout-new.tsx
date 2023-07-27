@@ -5,7 +5,7 @@ export default component$(() => {
 
   return (
     <>
-      <main class="  overflow-y-scroll h-[100%] bg-[#faf2e3]">
+      <main class="  overflow-y-scroll h-[100%] bg-white">
     <section class=" w-full mx-auto">
           <Slot />
 </section>
