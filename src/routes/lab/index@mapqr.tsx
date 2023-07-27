@@ -166,7 +166,7 @@ state.loading=false
           state.success=true
           setTimeout(()=>{
             state.success=false
-           // state.qr=''
+            state.qr=''
             state.exercise=1
             state.input=''
           },3000)
