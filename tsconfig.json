@@ -18,6 +18,7 @@
     "outDir": "tmp",
 
     "types": ["node", "vite/client"],
+    "typeRoots": ["./src/types/custom.d.ts" ],
     "paths": {
       "~/*": ["./src/*"]
     }
